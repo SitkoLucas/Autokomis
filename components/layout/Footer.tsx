@@ -14,7 +14,14 @@ export function Footer() {
               width={56}
               height={56}
             />
-            <span className="text-lg font-semibold text-ink">{site.shortName}</span>
+            <span className="flex flex-col leading-tight">
+              <span className="text-lg font-semibold tracking-tight text-ink">
+                {site.shortName}
+              </span>
+              <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
+                Procforce
+              </span>
+            </span>
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-muted">
             Cyfrowy sprzedawca autokomisu dostępny 24/7. Demo możliwości
