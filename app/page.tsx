@@ -1,4 +1,4 @@
-import { FeaturedVehicles, ContactTeaser, PurchaseProcess, ReviewsSection, SellCarSection, TradeInSection, TrustSection, WhyUs } from "@/components/home/HomeSections";
+import { FeaturedVehicles, PurchaseProcess, ReviewsSection, TradeInSection, TrustSection, WhyUs } from "@/components/home/HomeSections";
 import { Hero } from "@/components/home/Hero";
 
 export default function HomePage() {
@@ -8,11 +8,9 @@ export default function HomePage() {
       <FeaturedVehicles />
       <TrustSection />
       <WhyUs />
-      <SellCarSection />
       <TradeInSection />
       <PurchaseProcess />
       <ReviewsSection />
-      <ContactTeaser />
     </>
   );
 }

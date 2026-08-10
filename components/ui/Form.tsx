@@ -35,13 +35,17 @@ export function Button({
 export function Field({
   label,
   children,
+  labelClassName = "text-ink",
 }: {
   label: string;
   children: ReactNode;
+  labelClassName?: string;
 }) {
   return (
     <label className="block text-sm">
-      <span className="mb-1.5 block font-medium text-ink">{label}</span>
+      <span className={`mb-1.5 block font-medium ${labelClassName}`}>
+        {label}
+      </span>
       {children}
     </label>
   );

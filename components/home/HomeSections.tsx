@@ -3,7 +3,6 @@ import { SellLeadForm } from "@/components/flows/LeadForms";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { VehicleCard } from "@/components/vehicles/VehicleCard";
 import { reviews } from "@/lib/reviews";
-import { site } from "@/lib/site";
 import { getFeaturedVehicles } from "@/lib/vehicles";
 
 export function FeaturedVehicles() {
@@ -131,29 +130,6 @@ export function WhyUs() {
   );
 }
 
-export function SellCarSection() {
-  return (
-    <Section id="sprzedaj" muted>
-      <div className="grid items-start gap-10 lg:grid-cols-2">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-            Odkup
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            Chcesz sprzedać samochód?
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-ink-muted">
-            Otrzymaj wstępną wycenę. W produkcji lead trafi prosto do komisu.
-          </p>
-        </div>
-        <div className="rounded-3xl border border-border bg-white p-6">
-          <SellLeadForm mode="sell" />
-        </div>
-      </div>
-    </Section>
-  );
-}
-
 export function TradeInSection() {
   return (
     <Section id="rozliczenie">
@@ -243,69 +219,6 @@ export function ReviewsSection() {
             </figcaption>
           </figure>
         ))}
-      </div>
-    </Section>
-  );
-}
-
-export function ContactTeaser() {
-  return (
-    <Section id="kontakt" muted>
-      <div className="grid gap-8 rounded-[2rem] border border-border bg-white px-6 py-10 sm:px-10 lg:grid-cols-[1.2fr_0.8fr]">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-            Kontakt
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink">
-            Odwiedź nas albo napisz
-          </h2>
-          <p className="mt-4 max-w-lg text-ink-muted">
-            Dane poniżej są przykładowe. Po wdrożeniu podmienimy je na prawdziwy
-            adres, telefon i mapę komisu.
-          </p>
-          <dl className="mt-8 space-y-3 text-sm">
-            <div>
-              <dt className="font-semibold text-ink">Adres</dt>
-              <dd className="text-ink-muted">{site.address}</dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-ink">Telefon</dt>
-              <dd>
-                <a href={site.phoneHref} className="text-primary hover:underline">
-                  {site.phone}
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt className="font-semibold text-ink">E-mail</dt>
-              <dd>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="text-primary hover:underline"
-                >
-                  {site.email}
-                </a>
-              </dd>
-            </div>
-          </dl>
-        </div>
-        <div>
-          <p className="font-semibold text-ink">Godziny otwarcia</p>
-          <ul className="mt-4 space-y-2 text-sm text-ink-muted">
-            {site.hours.map((h) => (
-              <li key={h.days} className="flex justify-between gap-4 border-b border-border py-2">
-                <span>{h.days}</span>
-                <span className="font-medium text-ink">{h.time}</span>
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/kontakt"
-            className="mt-8 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark"
-          >
-            Formularz kontaktowy
-          </Link>
-        </div>
       </div>
     </Section>
   );

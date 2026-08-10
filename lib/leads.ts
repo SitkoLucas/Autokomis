@@ -31,6 +31,10 @@ export type LeadPayload = {
     year: string;
     mileage: string;
     expectedPrice: string;
+    bodyType?: string;
+    transmission?: string;
+    photoCount?: number;
+    photoNames?: string[];
   };
   interestedInSlug?: string;
 };

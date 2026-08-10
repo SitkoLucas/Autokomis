@@ -54,7 +54,7 @@ export function Hero() {
             Zostaw auto w rozliczeniu
           </Link>
           <Link
-            href="/#sprzedaj"
+            href="/sprzedaj"
             className="inline-flex rounded-full border border-ink/15 bg-white/80 px-6 py-3 text-sm font-semibold text-ink backdrop-blur hover:bg-white"
           >
             Sprzedaj auto
