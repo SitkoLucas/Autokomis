@@ -22,11 +22,15 @@ export type LeadPayload = {
   vehicle?: InquiryContext;
   bookingDate?: string;
   bookingTime?: string;
+  reservationDays?: number;
+  depositPercent?: number;
+  depositAmount?: number;
   tradeIn?: {
     make: string;
     model: string;
     year: string;
     mileage: string;
+    expectedPrice: string;
   };
   interestedInSlug?: string;
 };

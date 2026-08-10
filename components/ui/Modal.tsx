@@ -4,16 +4,23 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, type ReactNode } from "react";
 import { modalBackdrop, modalPanel } from "@/lib/motion";
 
+const sizeClass = {
+  lg: "max-w-lg",
+  xl: "max-w-5xl",
+} as const;
+
 export function Modal({
   open,
   onClose,
   title,
   children,
+  size = "lg",
 }: {
   open: boolean;
   onClose: () => void;
   title: string;
   children: ReactNode;
+  size?: keyof typeof sizeClass;
 }) {
   useEffect(() => {
     if (!open) return;
@@ -46,7 +53,7 @@ export function Modal({
             role="dialog"
             aria-modal="true"
             aria-label={title}
-            className="relative z-10 flex max-h-[92vh] w-full max-w-lg flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:rounded-3xl"
+            className={`relative z-10 flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-3xl bg-white shadow-2xl sm:rounded-3xl ${sizeClass[size]}`}
             variants={modalPanel}
             initial="hidden"
             animate="show"

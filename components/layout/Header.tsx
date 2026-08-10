@@ -7,6 +7,7 @@ import { site } from "@/lib/site";
 
 const links = [
   { href: "/oferta", label: "Oferta" },
+  { href: "/rezerwacje", label: "Rezerwacje" },
   { href: "/#sprzedaj", label: "Sprzedaj auto" },
   { href: "/kontakt", label: "Kontakt" },
 ];
@@ -32,7 +33,9 @@ export function Header() {
             const active =
               link.href === "/oferta"
                 ? pathname.startsWith("/oferta")
-                : pathname === link.href;
+                : link.href === "/rezerwacje"
+                  ? pathname.startsWith("/rezerwacje")
+                  : pathname === link.href;
             return (
               <Link
                 key={link.href}

@@ -150,6 +150,7 @@ export function SellLeadForm({
         model: String(fd.get("model") || ""),
         year: String(fd.get("year") || ""),
         mileage: String(fd.get("mileage") || ""),
+        expectedPrice: String(fd.get("expectedPrice") || ""),
       },
     });
     setLoading(false);
@@ -190,6 +191,14 @@ export function SellLeadForm({
           />
         </Field>
       </div>
+      <Field label="Cena, jaka Państwa interesuje za pojazd">
+        <input
+          name="expectedPrice"
+          required
+          className={inputClass}
+          inputMode="numeric"
+        />
+      </Field>
       <Field label="Telefon">
         <input name="phone" required className={inputClass} inputMode="tel" />
       </Field>
@@ -228,6 +237,7 @@ export function TradeInWithVehicleForm({
         model: String(fd.get("model") || ""),
         year: String(fd.get("year") || ""),
         mileage: String(fd.get("mileage") || ""),
+        expectedPrice: String(fd.get("expectedPrice") || ""),
       },
     });
     setLoading(false);
@@ -265,6 +275,14 @@ export function TradeInWithVehicleForm({
           />
         </Field>
       </div>
+      <Field label="Cena, jaka Państwa interesuje za pojazd">
+        <input
+          name="expectedPrice"
+          required
+          className={inputClass}
+          inputMode="numeric"
+        />
+      </Field>
       <Field label="Telefon">
         <input name="phone" required className={inputClass} inputMode="tel" />
       </Field>

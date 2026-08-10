@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { OfferCatalog } from "@/components/vehicles/OfferCatalog";
 import { parseFilters } from "@/lib/filters";
 
@@ -17,7 +18,9 @@ export default async function OfertaPage({
 
   return (
     <div className="bg-bg-muted/40">
-      <OfferCatalog initialFilters={initialFilters} />
+      <Suspense fallback={null}>
+        <OfferCatalog initialFilters={initialFilters} />
+      </Suspense>
     </div>
   );
 }

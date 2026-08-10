@@ -12,8 +12,8 @@ export function FeaturedVehicles() {
     <Section id="wybrane">
       <SectionHeading
         eyebrow="Oferta"
-        title="Wybrane samochody"
-        description="Przykładowa selekcja z demo inventory. W produkcji tu trafiają Wasze aktualne auta."
+        title="Najnowsze samochody"
+        description="Aktualna oferta. Kliknij auto, żeby zobaczyć zdjęcia, opis i warunki zakupu."
       />
       <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((v) => (
@@ -167,7 +167,7 @@ const steps = [
   },
   {
     title: "Zarezerwuj spokojnie",
-    text: "Zostaw dane. W produkcji możliwy zadatek online.",
+    text: "1% ceny za dzień roboczy (max 10 dni). Niewstawienie się oznacza przepadek zaliczki.",
   },
   {
     title: "Odbierz klucz",

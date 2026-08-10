@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   filterVehicles,
   resultsLabel,
@@ -12,6 +12,7 @@ import {
 import {
   getMakes,
   getModelsForMake,
+  getVehicleBySlug,
   vehicles,
   type FuelType,
   type TransmissionType,
@@ -19,6 +20,7 @@ import {
 import { Button, Field, inputClass } from "@/components/ui/Form";
 import { Drawer } from "@/components/ui/Drawer";
 import { VehicleCard } from "./VehicleCard";
+import { VehiclePreviewModal } from "./VehiclePreviewModal";
 
 function FiltersForm({
   value,
@@ -200,11 +202,16 @@ export function OfferCatalog({
   initialFilters: VehicleFiltersState;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [filters, setFilters] = useState(initialFilters);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [, startTransition] = useTransition();
 
   const results = useMemo(() => filterVehicles(vehicles, filters), [filters]);
+  const deepLinkedVehicle = useMemo(() => {
+    const slug = searchParams.get("slug");
+    return slug ? getVehicleBySlug(slug) : undefined;
+  }, [searchParams]);
 
   const apply = (next: VehicleFiltersState) => {
     setFilters(next);
@@ -214,6 +221,12 @@ export function OfferCatalog({
   };
 
   const reset = () => apply({ sort: "newest" });
+
+  const closeDeepLink = () => {
+    startTransition(() => {
+      router.replace(`/oferta${serializeFilters(filters)}`, { scroll: false });
+    });
+  };
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
@@ -293,6 +306,14 @@ export function OfferCatalog({
           </Button>
         </div>
       </Drawer>
+
+      {deepLinkedVehicle ? (
+        <VehiclePreviewModal
+          vehicle={deepLinkedVehicle}
+          open
+          onClose={closeDeepLink}
+        />
+      ) : null}
     </div>
   );
 }

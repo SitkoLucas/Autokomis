@@ -7,9 +7,13 @@ export function Footer() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
         <div>
           <p className="text-lg font-semibold text-ink">AutoKomis</p>
-          <p className="text-xs font-medium uppercase tracking-[0.18em] text-primary">
-            Procforce
-          </p>
+          <img
+            src="/procforce-logo.svg"
+            alt="Procforce"
+            className="mt-2 h-7 w-auto"
+            width={140}
+            height={45}
+          />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink-muted">
             Cyfrowy sprzedawca autokomisu dostępny 24/7. Demo możliwości
             Procforce dla nowoczesnej sprzedaży samochodów.
@@ -22,6 +26,11 @@ export function Footer() {
             <li>
               <Link href="/oferta" className="hover:text-ink">
                 Oferta
+              </Link>
+            </li>
+            <li>
+              <Link href="/rezerwacje" className="hover:text-ink">
+                Rezerwacje
               </Link>
             </li>
             <li>

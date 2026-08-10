@@ -3,6 +3,10 @@
 import { useMemo, useState } from "react";
 import { Button, Field, inputClass } from "@/components/ui/Form";
 import { SuccessState } from "@/components/ui/SuccessState";
+import {
+  calcMonthlyPayment,
+  FINANCING_DEFAULTS,
+} from "@/lib/financing";
 import { submitLeadDemo, type InquiryContext } from "@/lib/leads";
 
 const TIMES = ["10:00", "12:00", "15:30", "17:00"];
@@ -222,6 +226,20 @@ export function FinancingModalContent({
 }) {
   const [done, setDone] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [months, setMonths] = useState<number>(FINANCING_DEFAULTS.defaultMonths);
+  const [downPercent, setDownPercent] = useState<number>(
+    FINANCING_DEFAULTS.defaultDownPaymentPercent,
+  );
+
+  const downPayment = useMemo(
+    () => Math.round((context.price * downPercent) / 100),
+    [context.price, downPercent],
+  );
+  const installment = useMemo(
+    () => calcMonthlyPayment(context.price, months, downPayment),
+    [context.price, months, downPayment],
+  );
+  const financed = Math.max(0, context.price - downPayment);
 
   if (done) {
     return (
@@ -240,12 +258,70 @@ export function FinancingModalContent({
         <p className="mt-1 text-2xl font-semibold text-ink">
           {context.price.toLocaleString("pl-PL")} zł
         </p>
-        <p className="mt-1 text-sm font-medium text-primary">
-          od {monthlyPrice.toLocaleString("pl-PL")} zł/mies.
+        <p className="mt-1 text-sm text-ink-muted">
+          od {monthlyPrice.toLocaleString("pl-PL")} zł/mies. (orientacyjnie)
+        </p>
+        <p className="mt-4 text-3xl font-semibold tracking-tight text-primary">
+          {installment.toLocaleString("pl-PL")} zł
+          <span className="ml-1 text-base font-medium text-ink-muted">
+            /mies.
+          </span>
+        </p>
+        <p className="mt-1 text-xs text-ink-muted">
+          {months} rat · wkład {downPayment.toLocaleString("pl-PL")} zł ·
+          finansowane {financed.toLocaleString("pl-PL")} zł · RRSO ok.{" "}
+          {FINANCING_DEFAULTS.annualRatePercent.toLocaleString("pl-PL")}%
         </p>
       </div>
+
+      <div className="space-y-5 rounded-2xl border border-border px-4 py-4">
+        <label className="block">
+          <div className="mb-2 flex items-center justify-between gap-3 text-sm">
+            <span className="font-medium text-ink">Okres spłaty</span>
+            <span className="tabular-nums text-ink-muted">{months} mies.</span>
+          </div>
+          <input
+            type="range"
+            min={FINANCING_DEFAULTS.minMonths}
+            max={FINANCING_DEFAULTS.maxMonths}
+            step={FINANCING_DEFAULTS.monthStep}
+            value={months}
+            onChange={(e) => setMonths(Number(e.target.value))}
+            className="w-full accent-primary"
+            aria-label="Okres spłaty w miesiącach"
+          />
+          <div className="mt-1 flex justify-between text-xs text-ink-muted">
+            <span>{FINANCING_DEFAULTS.minMonths} mies.</span>
+            <span>{FINANCING_DEFAULTS.maxMonths} mies.</span>
+          </div>
+        </label>
+
+        <label className="block">
+          <div className="mb-2 flex items-center justify-between gap-3 text-sm">
+            <span className="font-medium text-ink">Wkład własny</span>
+            <span className="tabular-nums text-ink-muted">
+              {downPercent}% · {downPayment.toLocaleString("pl-PL")} zł
+            </span>
+          </div>
+          <input
+            type="range"
+            min={FINANCING_DEFAULTS.minDownPaymentPercent}
+            max={FINANCING_DEFAULTS.maxDownPaymentPercent}
+            step={5}
+            value={downPercent}
+            onChange={(e) => setDownPercent(Number(e.target.value))}
+            className="w-full accent-primary"
+            aria-label="Wkład własny w procentach"
+          />
+          <div className="mt-1 flex justify-between text-xs text-ink-muted">
+            <span>{FINANCING_DEFAULTS.minDownPaymentPercent}%</span>
+            <span>{FINANCING_DEFAULTS.maxDownPaymentPercent}%</span>
+          </div>
+        </label>
+      </div>
+
       <p className="text-sm leading-relaxed text-ink-muted">
-        To prezentacja możliwości finansowania. W produkcji podłączymy partnera
+        Kalkulator jest orientacyjny. W produkcji podłączymy partnera
         kredytowego lub leasingowego. Zostaw kontakt, a przygotujemy ofertę.
       </p>
       <form
@@ -259,6 +335,7 @@ export function FinancingModalContent({
             name: String(fd.get("name") || ""),
             phone: String(fd.get("phone") || ""),
             vehicle: context,
+            message: `Preferencja: ${months} mies., wkład ${downPercent}% (${downPayment} zł), rata ok. ${installment} zł`,
           });
           setLoading(false);
           setDone(true);
