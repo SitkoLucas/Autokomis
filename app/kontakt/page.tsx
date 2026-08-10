@@ -54,25 +54,11 @@ export default function KontaktPage() {
             </dl>
           </div>
 
-          <div>
-            <p className="font-semibold text-ink">Godziny otwarcia</p>
-            <ul className="mt-4 space-y-2 text-sm text-ink-muted">
-              {site.hours.map((h) => (
-                <li
-                  key={h.days}
-                  className="flex justify-between gap-4 border-b border-border py-2"
-                >
-                  <span>{h.days}</span>
-                  <span className="font-medium text-ink">{h.time}</span>
-                </li>
-              ))}
-            </ul>
-            <a
-              href="#formularz"
-              className="mt-8 inline-flex rounded-full bg-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-primary-dark"
-            >
-              Formularz kontaktowy
-            </a>
+          <div id="formularz" className="scroll-mt-24">
+            <p className="font-semibold text-ink">Formularz</p>
+            <div className="mt-4">
+              <ContactLeadForm />
+            </div>
           </div>
         </div>
 
@@ -86,14 +72,19 @@ export default function KontaktPage() {
               sizes="(max-width: 1024px) 100vw, 50vw"
             />
           </div>
-          <div
-            id="formularz"
-            className="scroll-mt-24 rounded-3xl border border-border bg-white p-6 shadow-sm"
-          >
-            <h2 className="text-xl font-semibold text-ink">Formularz</h2>
-            <div className="mt-5">
-              <ContactLeadForm />
-            </div>
+          <div className="flex h-64 flex-col justify-center rounded-3xl border border-border bg-white p-6 sm:h-80 sm:p-8">
+            <p className="font-semibold text-ink">Godziny otwarcia</p>
+            <ul className="mt-4 space-y-2 text-sm text-ink-muted">
+              {site.hours.map((h) => (
+                <li
+                  key={h.days}
+                  className="flex justify-between gap-4 border-b border-border py-2"
+                >
+                  <span>{h.days}</span>
+                  <span className="font-medium text-ink">{h.time}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>

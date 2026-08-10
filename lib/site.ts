@@ -10,7 +10,7 @@ export const site = {
   hours: [
     { days: "Poniedziałek-piątek", time: "9:00-18:00" },
     { days: "Sobota", time: "9:00-14:00" },
-    { days: "Niedziela", time: "Umówione spotkania" },
+    { days: "Niedziela", time: "Umów spotkanie" },
   ],
   demoNote: "Wersja prezentacyjna. Przykładowe treści i oferty.",
 } as const;

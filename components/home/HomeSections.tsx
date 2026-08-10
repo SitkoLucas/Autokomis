@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { SellLeadForm } from "@/components/flows/LeadForms";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { VehicleCard } from "@/components/vehicles/VehicleCard";
 import { reviews } from "@/lib/reviews";
@@ -125,30 +124,6 @@ export function WhyUs() {
             </p>
           </div>
         ))}
-      </div>
-    </Section>
-  );
-}
-
-export function TradeInSection() {
-  return (
-    <Section id="rozliczenie">
-      <div className="grid items-start gap-10 lg:grid-cols-2">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-            Rozliczenie
-          </p>
-          <h2 className="mt-3 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
-            Zostaw auto w rozliczeniu
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-ink-muted">
-            Kupujesz z oferty i oddajesz poprzednie auto? Zostaw dane. Na detailu
-            auta formularz pamięta, którym samochodem jesteś zainteresowany.
-          </p>
-        </div>
-        <div className="rounded-3xl border border-border bg-bg-muted p-6">
-          <SellLeadForm mode="trade-in" />
-        </div>
       </div>
     </Section>
   );

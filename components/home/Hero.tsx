@@ -48,12 +48,6 @@ export function Hero() {
             Zobacz ofertę
           </Link>
           <Link
-            href="/#rozliczenie"
-            className="inline-flex rounded-full bg-ink px-6 py-3 text-sm font-semibold text-white hover:bg-ink/90"
-          >
-            Zostaw auto w rozliczeniu
-          </Link>
-          <Link
             href="/sprzedaj"
             className="inline-flex rounded-full border border-ink/15 bg-white/80 px-6 py-3 text-sm font-semibold text-ink backdrop-blur hover:bg-white"
           >

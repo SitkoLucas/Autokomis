@@ -129,90 +129,6 @@ export function ContactLeadForm({
   );
 }
 
-export function SellLeadForm({
-  mode = "sell",
-}: {
-  mode?: "sell" | "trade-in";
-}) {
-  const [done, setDone] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const fd = new FormData(e.currentTarget);
-    setLoading(true);
-    await submitLeadDemo({
-      type: mode,
-      name: "Klient",
-      phone: String(fd.get("phone") || ""),
-      tradeIn: {
-        make: String(fd.get("make") || ""),
-        model: String(fd.get("model") || ""),
-        year: String(fd.get("year") || ""),
-        mileage: String(fd.get("mileage") || ""),
-        expectedPrice: String(fd.get("expectedPrice") || ""),
-      },
-    });
-    setLoading(false);
-    setDone(true);
-  }
-
-  if (done) {
-    return (
-      <SuccessState
-        title="Dziękujemy"
-        description={
-          mode === "sell"
-            ? "Przygotujemy wstępną wycenę i oddzwonimy."
-            : "Skontaktujemy się w sprawie rozliczenia Twojego auta."
-        }
-      />
-    );
-  }
-
-  return (
-    <form onSubmit={onSubmit} className="space-y-4">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Marka">
-          <input name="make" required className={inputClass} />
-        </Field>
-        <Field label="Model">
-          <input name="model" required className={inputClass} />
-        </Field>
-        <Field label="Rok">
-          <input name="year" required className={inputClass} inputMode="numeric" />
-        </Field>
-        <Field label="Przebieg">
-          <input
-            name="mileage"
-            required
-            className={inputClass}
-            inputMode="numeric"
-          />
-        </Field>
-      </div>
-      <Field label="Cena, jaka Państwa interesuje za pojazd">
-        <input
-          name="expectedPrice"
-          required
-          className={inputClass}
-          inputMode="numeric"
-        />
-      </Field>
-      <Field label="Telefon">
-        <input name="phone" required className={inputClass} inputMode="tel" />
-      </Field>
-      <Button type="submit" disabled={loading} className="w-full">
-        {loading
-          ? "Wysyłanie..."
-          : mode === "sell"
-            ? "Wyceń moje auto"
-            : "Wyślij zgłoszenie"}
-      </Button>
-    </form>
-  );
-}
-
 export function TradeInWithVehicleForm({
   interestedInSlug,
   onDone,
@@ -257,7 +173,7 @@ export function TradeInWithVehicleForm({
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Marka Twojego auta">
+        <Field label="Marka">
           <input name="make" required className={inputClass} />
         </Field>
         <Field label="Model">
@@ -287,7 +203,7 @@ export function TradeInWithVehicleForm({
         <input name="phone" required className={inputClass} inputMode="tel" />
       </Field>
       <Button type="submit" disabled={loading} className="w-full">
-        {loading ? "Wysyłanie..." : "Zostaw auto w rozliczeniu"}
+        {loading ? "Wysyłanie..." : "Wyślij zgłoszenie"}
       </Button>
     </form>
   );
