@@ -8,8 +8,9 @@ import { site } from "@/lib/site";
 const links = [
   { href: "/oferta", label: "Oferta" },
   { href: "/rezerwacje", label: "Rezerwacje" },
-  { href: "/#sprzedaj", label: "Sprzedaj auto" },
+  { href: "/sprzedaj", label: "Sprzedaj auto" },
   { href: "/kontakt", label: "Kontakt" },
+  { href: "/panel-szefa", label: "(Panel Szefa)" },
 ];
 
 export function Header() {
@@ -19,12 +20,25 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-white/90 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" className="group flex flex-col leading-tight">
-          <span className="text-lg font-semibold tracking-tight text-ink">
-            AutoKomis
-          </span>
-          <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
-            Procforce
+        <Link
+          href="/"
+          className="flex shrink-0 items-center gap-2"
+          aria-label={site.shortName}
+        >
+          <img
+            src="/logo-autokomisu.png"
+            alt={site.shortName}
+            className="h-11 w-11 rounded-full object-cover sm:h-12 sm:w-12"
+            width={48}
+            height={48}
+          />
+          <span className="hidden flex-col leading-tight sm:flex">
+            <span className="text-base font-semibold tracking-tight text-ink">
+              {site.shortName}
+            </span>
+            <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-primary">
+              Procforce
+            </span>
           </span>
         </Link>
 
@@ -33,8 +47,10 @@ export function Header() {
             const active =
               link.href === "/oferta"
                 ? pathname.startsWith("/oferta")
-                : link.href === "/rezerwacje"
-                  ? pathname.startsWith("/rezerwacje")
+                : link.href === "/rezerwacje" ||
+                    link.href === "/sprzedaj" ||
+                    link.href === "/panel-szefa"
+                  ? pathname.startsWith(link.href)
                   : pathname === link.href;
             return (
               <Link
