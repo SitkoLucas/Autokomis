@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log*
+.next
+out
+build
+coverage
+.git
+.cursor
+.vscode
+.env
+.env*.local
+*.pem
+.DS_Store
+README.md
