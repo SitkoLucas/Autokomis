@@ -1,0 +1,9 @@
+---
+description: Bez myślników typograficznych i strzałek Unicode
+alwaysApply: true
+---
+
+# Bez myślników i strzałek
+
+- Nigdy nie używaj `—` (em dash), `–` (en dash) ani strzałek Unicode (`→`, `⇒`, `➜`, `➔`).
+- Zamiast tego: przecinek, dwukropek, kropka, nawiasy albo łącznik ASCII `-`.
