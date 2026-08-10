@@ -33,13 +33,34 @@ export function FeaturedVehicles() {
 }
 
 const trustItems = [
-  "Sprawdzony VIN",
-  "Historia pojazdu",
-  "Możliwość sprawdzenia w serwisie",
-  "Pomiar lakieru",
-  "Udokumentowane pochodzenie",
-  "Finansowanie",
-  "Auto w rozliczeniu",
+  {
+    title: "Sprawdzony VIN",
+    text: "Numer VIN sprawdzony, dane zgodne z dokumentami.",
+  },
+  {
+    title: "Historia pojazdu",
+    text: "Przebieg, serwis i naprawy w przejrzystym raporcie.",
+  },
+  {
+    title: "Możliwość sprawdzenia w serwisie",
+    text: "Możesz sprawdzić auto u niezależnego mechanika przed zakupem.",
+  },
+  {
+    title: "Pomiar lakieru",
+    text: "Grubość lakieru zmierzona, poprawki wskazane bez owijania.",
+  },
+  {
+    title: "Udokumentowane pochodzenie",
+    text: "Pełna dokumentacja pochodzenia i własności.",
+  },
+  {
+    title: "Finansowanie",
+    text: "Rata dopasowana do Ciebie: kredyt lub leasing.",
+  },
+  {
+    title: "Auto w rozliczeniu",
+    text: "Twoje auto w rozliczeniu, wycena online w kilka minut.",
+  },
 ];
 
 export function TrustSection() {
@@ -48,19 +69,17 @@ export function TrustSection() {
       <SectionHeading
         eyebrow="Zaufanie"
         title="Kupujesz ze spokojem"
-        description="Poniższe elementy to przykładowe możliwości wdrożenia. W docelowej stronie dopasujemy je do realnej oferty komisu."
+        description="Co robimy, zanim auto trafi do Ciebie. Transparentnie, bez niespodzianek."
       />
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {trustItems.map((item) => (
           <div
-            key={item}
+            key={item.title}
             className="rounded-3xl border border-border bg-white px-5 py-6"
           >
             <div className="mb-3 h-1.5 w-10 rounded-full bg-primary" />
-            <p className="font-semibold text-ink">{item}</p>
-            <p className="mt-2 text-sm text-ink-muted">
-              Przykładowa możliwość przyszłego wdrożenia.
-            </p>
+            <p className="font-semibold text-ink">{item.title}</p>
+            <p className="mt-2 text-sm text-ink-muted">{item.text}</p>
           </div>
         ))}
       </div>
@@ -93,7 +112,7 @@ export function WhyUs() {
       <SectionHeading
         eyebrow="Dlaczego my"
         title="Dlaczego warto kupić u nas"
-        description="Każdy blok ma jeden cel sprzedażowy: zaufanie, kontakt albo domknięcie decyzji."
+        description="Od pierwszego wejścia klient dostaje pełną opiekę: dokładne informacje o pojeździe, możliwość jazdy próbnej i sprawdzenia auta pod każdym kątem, którego potrzebuje. To nie wizytówka komisu, tylko platforma sprzedażowa online, która od razu buduje zaufanie i prowadzi do kontaktu."
       />
       <div className="mt-10 grid gap-5 md:grid-cols-2">
         {whyItems.map((item) => (

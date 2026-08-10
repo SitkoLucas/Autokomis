@@ -1,11 +1,12 @@
 export const site = {
   name: "AutoKomis Procforce",
   shortName: "AutoKomis",
-  phone: "+48 000 000 000",
-  phoneHref: "tel:+48000000000",
+  description: "Komis samochodowy",
+  phone: "669 687 808",
+  phoneHref: "tel:+48669687808",
   email: "kontakt@autokomis-procforce.pl",
-  whatsapp: "48000000000",
-  address: "ul. Przykładowa 1, 00-000 Warszawa",
+  whatsapp: "48669687808",
+  address: "Żyrardowska 61, 96-316 Stare Budy",
   hours: [
     { days: "Poniedziałek-piątek", time: "9:00-18:00" },
     { days: "Sobota", time: "9:00-14:00" },

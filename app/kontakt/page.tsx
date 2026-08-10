@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { ContactLeadForm } from "@/components/flows/LeadForms";
 import { site } from "@/lib/site";
 
@@ -17,11 +18,11 @@ export default function KontaktPage() {
         <h1 className="mt-3 text-4xl font-semibold tracking-tight text-ink">
           Napisz lub zadzwoń
         </h1>
-        <p className="mt-4 text-ink-muted">
-          Formularz działa w trybie demo: zapisuje lead lokalnie, bez wysyłki na
-          serwer.
-        </p>
         <dl className="mt-8 space-y-4 text-sm">
+          <div>
+            <dt className="font-semibold text-ink">Opis</dt>
+            <dd className="text-ink-muted">{site.description}</dd>
+          </div>
           <div>
             <dt className="font-semibold text-ink">Adres</dt>
             <dd className="text-ink-muted">{site.address}</dd>
@@ -43,10 +44,14 @@ export default function KontaktPage() {
             </dd>
           </div>
         </dl>
-        <div className="mt-8 overflow-hidden rounded-3xl border border-border bg-bg-muted">
-          <div className="flex h-56 items-center justify-center text-sm text-ink-muted">
-            Placeholder mapy (demo)
-          </div>
+        <div className="relative mt-8 h-56 overflow-hidden rounded-3xl border border-border bg-bg-muted">
+          <Image
+            src="/streetview-komis.png"
+            alt="Street View komisu AutoZakątek przy DW719"
+            fill
+            className="object-cover object-center"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+          />
         </div>
       </div>
       <div className="rounded-3xl border border-border bg-white p-6 shadow-sm">
