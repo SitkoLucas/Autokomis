@@ -42,6 +42,8 @@ export type Vehicle = {
   description: string;
   equipment: EquipmentGroup[];
   images: string[];
+  /** Wewnętrzne: stock vs komis. Nie pokazywać publicznie. */
+  listingSource?: "stock" | "consignment";
 };
 
 const eq = (

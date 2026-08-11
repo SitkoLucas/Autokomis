@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useTransition } from "react";
+import { useMemo, useState, useTransition, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   filterVehicles,
@@ -10,13 +10,12 @@ import {
   type VehicleFiltersState,
 } from "@/lib/filters";
 import {
-  getMakes,
-  getModelsForMake,
-  getVehicleBySlug,
-  vehicles,
-  type FuelType,
-  type TransmissionType,
-} from "@/lib/vehicles";
+  getCatalogMakes,
+  getCatalogModelsForMake,
+  getCatalogVehicleBySlug,
+  getCatalogVehicles,
+} from "@/lib/catalog";
+import type { FuelType, TransmissionType, Vehicle } from "@/lib/vehicles";
 import { Button, Field, inputClass } from "@/components/ui/Form";
 import { Drawer } from "@/components/ui/Drawer";
 import { VehicleCard } from "./VehicleCard";
@@ -25,11 +24,16 @@ import { VehiclePreviewModal } from "./VehiclePreviewModal";
 function FiltersForm({
   value,
   onChange,
+  catalog,
 }: {
   value: VehicleFiltersState;
   onChange: (next: VehicleFiltersState) => void;
+  catalog: Vehicle[];
 }) {
-  const models = useMemo(() => getModelsForMake(value.make), [value.make]);
+  const models = useMemo(
+    () => getCatalogModelsForMake(catalog, value.make),
+    [catalog, value.make],
+  );
 
   return (
     <div className="space-y-4">
@@ -42,7 +46,7 @@ function FiltersForm({
           }
         >
           <option value="">Wszystkie</option>
-          {getMakes().map((m) => (
+          {getCatalogMakes(catalog).map((m) => (
             <option key={m} value={m}>
               {m}
             </option>
@@ -205,12 +209,20 @@ export function OfferCatalog({
   const searchParams = useSearchParams();
   const [filters, setFilters] = useState(initialFilters);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [catalog, setCatalog] = useState<Vehicle[]>([]);
   const [, startTransition] = useTransition();
 
-  const results = useMemo(() => filterVehicles(vehicles, filters), [filters]);
+  useEffect(() => {
+    setCatalog(getCatalogVehicles());
+  }, []);
+
+  const results = useMemo(
+    () => filterVehicles(catalog, filters),
+    [catalog, filters],
+  );
   const deepLinkedVehicle = useMemo(() => {
     const slug = searchParams.get("slug");
-    return slug ? getVehicleBySlug(slug) : undefined;
+    return slug ? getCatalogVehicleBySlug(slug) : undefined;
   }, [searchParams]);
 
   const apply = (next: VehicleFiltersState) => {
@@ -260,7 +272,7 @@ export function OfferCatalog({
               Wyczyść
             </button>
           </div>
-          <FiltersForm value={filters} onChange={apply} />
+          <FiltersForm value={filters} onChange={apply} catalog={catalog} />
         </aside>
 
         <div>
@@ -296,6 +308,7 @@ export function OfferCatalog({
           onChange={(next) => {
             apply(next);
           }}
+          catalog={catalog}
         />
         <div className="mt-6 flex gap-3">
           <Button variant="secondary" className="flex-1" onClick={reset}>

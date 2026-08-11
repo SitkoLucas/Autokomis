@@ -2,15 +2,17 @@
 
 import { useState } from "react";
 import { AddVehicleForm } from "./AddVehicleForm";
+import { ConsignmentOffersPanel } from "./ConsignmentOffersPanel";
 import { PurchaseOffersPanel } from "./PurchaseOffersPanel";
 import { ReservationsPanel } from "./ReservationsPanel";
 
-type TabId = "add" | "reservations" | "purchase";
+type TabId = "add" | "reservations" | "purchase" | "consignment";
 
 const tabs: { id: TabId; label: string }[] = [
   { id: "add", label: "Dodaj auto na stronę" },
   { id: "reservations", label: "Rezerwacje" },
   { id: "purchase", label: "Oferty kupna" },
+  { id: "consignment", label: "Auta w komis" },
 ];
 
 export function BossPanel() {
@@ -48,6 +50,7 @@ export function BossPanel() {
         {tab === "add" ? <AddVehicleForm /> : null}
         {tab === "reservations" ? <ReservationsPanel /> : null}
         {tab === "purchase" ? <PurchaseOffersPanel /> : null}
+        {tab === "consignment" ? <ConsignmentOffersPanel /> : null}
       </div>
     </div>
   );

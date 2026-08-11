@@ -9,7 +9,9 @@ const links = [
   { href: "/oferta", label: "Oferta" },
   { href: "/rezerwacje", label: "Rezerwacje" },
   { href: "/sprzedaj", label: "Sprzedaj auto" },
+  { href: "/wstaw-auto-w-komis", label: "Wstaw auto w komis" },
   { href: "/kontakt", label: "Kontakt" },
+  { href: "/panel-klienta", label: "(Panel Klienta)" },
   { href: "/panel-szefa", label: "(Panel Szefa)" },
 ];
 
@@ -49,6 +51,8 @@ export function Header() {
                 ? pathname.startsWith("/oferta")
                 : link.href === "/rezerwacje" ||
                     link.href === "/sprzedaj" ||
+                    link.href === "/wstaw-auto-w-komis" ||
+                    link.href === "/panel-klienta" ||
                     link.href === "/panel-szefa"
                   ? pathname.startsWith(link.href)
                   : pathname === link.href;
