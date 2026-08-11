@@ -65,8 +65,8 @@ export default function KontaktPage() {
         <div className="grid gap-10 lg:grid-cols-2">
           <div className="relative h-64 overflow-hidden rounded-3xl border border-border bg-white sm:h-80">
             <Image
-              src="/streetview-komis.png"
-              alt="Street View komisu AutoZakątek przy DW719"
+              src="/wizualizacja-komisu.png"
+              alt="Autokomis: plac z samochodami i budynek komisu"
               fill
               className="object-cover object-center"
               sizes="(max-width: 1024px) 100vw, 50vw"
